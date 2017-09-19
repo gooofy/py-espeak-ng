@@ -1,0 +1,126 @@
+py-espeak-ng
+------------
+
+Some simple wrappers around eSpeak NG intended to make using this excellent TTS
+for waveform and IPA generation as convenient as possible. 
+
+Target audience are developers who would like to use eSpeak NG as-is for speech
+synthesis in their Python application on GNU/Linux operating systems.
+
+Constructive comments, patches and pull-requests are very welcome.
+
+Examples
+~~~~~~~~
+
+Direct TTS Audio Output
+^^^^^^^^^^^^^^^^^^^^^^^
+
+First, import the ESpeakNG engine wrapper:
+[source,python]
+----
+from espeakng import ESpeakNG
+----
+
+now for some simple direct TTS output:
+
+[source,python]
+----
+esng = ESpeakNG()
+esng.say('Hello World!')
+----
+
+lower pitch and speed:
+[source,python]
+----
+esng.pitch = 32
+esng.speed = 150
+esng.say('Hello World!')
+----
+
+try a different language:
+[source,python]
+----
+esng.voice = 'german'
+esng.say('Hallo Welt!')
+----
+
+specify phonemes instead of words:
+[source,python]
+----
+esng.voice = 'english-us'
+esng.say("[[h@l'oU w'3:ld]]")
+----
+
+Synthesize Wave File without Playing It
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+From Text:
+
+[source,python]
+----
+import wave
+import StringIO
+
+esng.voice = 'english-us'
+wavs = esng.synth_wav('Hello World!')
+wav = wave.open(StringIO.StringIO(wavs))
+print wav.getnchannels(), wav.getframerate(), wav.getnframes()
+----
+result:
+----
+1 22050 24210
+----
+
+List Available Voices
+^^^^^^^^^^^^^^^^^^^^^
+[source,python]
+----
+l = esng.voices
+----
+result:
+----
+>>> l[0]
+{'pty': '5', 'language': 'af', 'gender': 'M', 'age': '--', 'voice_name': 'afrikaans', 'file': 'gmw/af'}
+>>> l[1]
+{'pty': '5', 'language': 'am', 'gender': '-', 'age': '--', 'voice_name': 'amharic', 'file': 'sem/am'}
+>>> l[2]
+{'pty': '5', 'language': 'an', 'gender': 'M', 'age': '--', 'voice_name': 'aragonese', 'file': 'roa/an'}
+...
+----
+
+Grapheme to Phoneme (G2P) Conversion
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[source,python]
+----
+ipa = esng.g2p ('Hello World!', ipa=2)
+
+----
+result:
+----
+>>> print ipa
+həlˈo͡ʊ wˈɜːld
+----
+
+
+Links
+~~~~~
+
+* https://github.com/espeak-ng/espeak-ng [eSpeak NG]
+
+Requirements
+~~~~~~~~~~~~
+
+* Python 2.7
+* espeak-ng binary installed and in PATH
+
+License
+~~~~~~~
+
+My own code is LGPLv3 licensed unless otherwise noted in the script's copyright
+headers.
+
+Author
+~~~~~~
+
+Guenter Bartsch <guenter@zamia.org>
+
