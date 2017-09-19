@@ -1,0 +1,22 @@
+# use glob syntax.
+syntax: glob
+*.swp
+*.swo
+*.pyc
+tmp
+old
+*.log
+TODO
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+tmp
+old
+README.html
+
