@@ -90,13 +90,19 @@ class ESpeakNG(object):
 
         self._espeak_exe(args, sync=sync)
 
-    def synth_wav(self, txt):
+    def synth_wav(self, txt, fmt='txt'):
 
         wav = None
 
         with tempfile.NamedTemporaryFile() as f:
 
             txte = txt.encode('utf8')
+
+            if fmt == 'xs':
+                txte = '[[' + txte + ']]'
+            elif fmt != 'txt':
+                raise Exception ('unknown format: %s' % fmt)
+
             args = ['-w', f.name, txte]
 
             self._espeak_exe(args, sync=True)
