@@ -95,18 +95,6 @@ class TestESpeakNG (unittest.TestCase):
             ipa = esng.g2p (g, ipa=2)
             self.assertEquals(ipa, ipa_t)
 
-    def test_synth_wav(self):
-
-        esng = ESpeakNG(voice='english-us')
-        esng.pitch = 32
-        esng.speed = 150
-        wavs = esng.synth_wav('Hello World!')
-        wav = wave.open(StringIO.StringIO(wavs))
-        
-        self.assertEqual   (wav.getnchannels(),     1)
-        self.assertEqual   (wav.getframerate(), 22050)
-        self.assertGreater (wav.getnframes(),   24000)
-
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.ERROR)
