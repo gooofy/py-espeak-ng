@@ -20,3 +20,7 @@ tmp
 old
 README.html
 README
+README.md
+README.xml
+dist/
+py_espeak_ng.egg-info/
