@@ -110,7 +110,7 @@ Links
 Requirements
 ~~~~~~~~~~~~
 
-* Python 2.7
+* Python 2 or 3
 * espeak-ng binary installed and in PATH
 
 License

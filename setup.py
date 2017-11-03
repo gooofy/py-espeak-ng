@@ -13,8 +13,12 @@ setup(name         ='py-espeak-ng',
                       'Topic :: Multimedia :: Sound/Audio :: Speech',
                       'Operating System :: POSIX :: Linux',
                       'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+                      'Programming Language :: Python :: 2',
+                      'Programming Language :: Python :: 2.7',
+                      'Programming Language :: Python :: 3',
+                      'Programming Language :: Python :: 3.4',
                      ],
-      keywords     = 'eSpeak NG TTS text to speech interface'
+      keywords     = 'eSpeak NG TTS text to speech interface',
       platforms    = 'Linux',
       license      = 'LGPLv3',
       package_dir  = {'espeakng': 'espeakng'},
@@ -23,4 +27,3 @@ setup(name         ='py-espeak-ng',
       author       = "Guenter Bartsch",
       author_email = "guenter@zamia.org",
       )
-

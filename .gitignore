@@ -23,4 +23,5 @@ README
 README.md
 README.xml
 dist/
+build/
 py_espeak_ng.egg-info/

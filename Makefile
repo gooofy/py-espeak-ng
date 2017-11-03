@@ -14,8 +14,8 @@ tests:
 
 dist:	README.md
 	python setup.py sdist
+	python setup.py bdist_wheel --universal
 
 clean:
 	rm -f *.html *.png README 
-	rm -rf dist espeakng.egg-info
-
+	rm -rf dist espeakng.egg-info build
