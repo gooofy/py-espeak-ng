@@ -154,7 +154,7 @@ class ESpeakNG(object):
             if first:
                 first=False
                 continue
-            parts = v.split()
+            parts = v.decode('utf8').split()
 
             if len(parts)<5:
                 continue
