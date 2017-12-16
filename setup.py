@@ -2,10 +2,8 @@
 
 from setuptools import setup, find_packages
 
-EXCLUDED = ['*.tests', '*.tests.*', 'tests.*', 'tests']
-
 setup(name         ='py-espeak-ng',
-      version      ='0.1.0',
+      version      ='0.1.1',
       description  ='Python interface for eSpeak NG',
       url          ='https://github.com/gooofy/py-espeak-ng',
       classifiers  = [
@@ -22,8 +20,7 @@ setup(name         ='py-espeak-ng',
       platforms    = 'Linux',
       license      = 'LGPLv3',
       package_dir  = {'espeakng': 'espeakng'},
-      test_suite   = 'tests',
-      packages     = find_packages('.', EXCLUDED),
+      packages     = ['espeak-ng'],
       author       = "Guenter Bartsch",
       author_email = "guenter@zamia.org",
       )

@@ -20,7 +20,7 @@
 
 import unittest
 import logging
-import StringIO
+from io import StringIO, BytesIO
 import wave
 
 from espeakng import ESpeakNG
@@ -66,7 +66,7 @@ class TestESpeakNG (unittest.TestCase):
         esng.pitch = 32
         esng.speed = 150
         wavs = esng.synth_wav('Hello World!')
-        wav = wave.open(StringIO.StringIO(wavs))
+        wav = wave.open(BytesIO(wavs))
         
         self.assertEqual   (wav.getnchannels(),     1)
         self.assertEqual   (wav.getframerate(), 22050)
@@ -78,7 +78,7 @@ class TestESpeakNG (unittest.TestCase):
         esng.pitch = 32
         esng.speed = 150
         wavs = esng.synth_wav("h@l'oU", fmt='xs')
-        wav = wave.open(StringIO.StringIO(wavs))
+        wav = wave.open(BytesIO(wavs))
         
         self.assertEqual   (wav.getnchannels(),     1)
         self.assertEqual   (wav.getframerate(), 22050)
@@ -90,10 +90,10 @@ class TestESpeakNG (unittest.TestCase):
         for g, xs_t, ipa_t in G2P_TESTS:
 
             xs  = esng.g2p (g)
-            self.assertEquals(xs, xs_t)
+            self.assertEqual(xs, xs_t)
 
             ipa = esng.g2p (g, ipa=2)
-            self.assertEquals(ipa, ipa_t)
+            self.assertEqual(ipa, ipa_t)
 
 if __name__ == "__main__":
 

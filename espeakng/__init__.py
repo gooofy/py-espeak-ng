@@ -96,12 +96,13 @@ class ESpeakNG(object):
 
         with tempfile.NamedTemporaryFile() as f:
 
-            txte = txt.encode('utf8')
 
             if fmt == 'xs':
-                txte = '[[' + txte + ']]'
+                txt = '[[' + txt + ']]'
             elif fmt != 'txt':
                 raise Exception ('unknown format: %s' % fmt)
+
+            txte = txt.encode('utf8')
 
             args = ['-w', f.name, txte]
 

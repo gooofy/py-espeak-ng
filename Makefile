@@ -1,6 +1,6 @@
 all:	README.html README.md
 
-.PHONY:	tests clean dist
+.PHONY:	tests clean dist upload
 
 %.html: %.adoc
 	asciidoctor -r asciidoctor-diagram -a toc $<
@@ -15,6 +15,9 @@ tests:
 dist:	README.md
 	python setup.py sdist
 	python setup.py bdist_wheel --universal
+
+upload:
+	twine upload dist/*
 
 clean:
 	rm -f *.html *.png README 
