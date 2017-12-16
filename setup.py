@@ -20,7 +20,7 @@ setup(name         ='py-espeak-ng',
       platforms    = 'Linux',
       license      = 'LGPLv3',
       package_dir  = {'espeakng': 'espeakng'},
-      packages     = ['espeak-ng'],
+      packages     = ['espeakng'],
       author       = "Guenter Bartsch",
       author_email = "guenter@zamia.org",
       )
