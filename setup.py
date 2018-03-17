@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(name         ='py-espeak-ng',
-      version      ='0.1.2',
+      version      ='0.1.3',
       description  ='Python interface for eSpeak NG',
       url          ='https://github.com/gooofy/py-espeak-ng',
       classifiers  = [
@@ -18,7 +18,7 @@ setup(name         ='py-espeak-ng',
                      ],
       keywords     = 'eSpeak NG TTS text to speech interface',
       platforms    = 'Linux',
-      license      = 'LGPLv3',
+      license      = 'Apache',
       package_dir  = {'espeakng': 'espeakng'},
       packages     = ['espeakng'],
       author       = "Guenter Bartsch",
