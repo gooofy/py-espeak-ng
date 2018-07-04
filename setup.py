@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(name         ='py-espeak-ng',
-      version      ='0.1.4',
+      version      ='0.1.5',
       description  ='Python interface for eSpeak NG',
       url          ='https://github.com/gooofy/py-espeak-ng',
       classifiers  = [

@@ -66,13 +66,27 @@ class ESpeakNG(object):
         p = subprocess.Popen(cmd,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT)
+
         res = iter(p.stdout.readline, b'')
         if not sync:
+            p.stdout.close()
+            if p.stderr:
+                p.stderr.close()
+            if p.stdin:
+                p.stdin.close()
             return res
 
         res2 = []
         for line in res:
             res2.append(line)
+
+        p.stdout.close()
+        if p.stderr:
+            p.stderr.close()
+        if p.stdin:
+            p.stdin.close()
+        p.wait()
+
         return res2
 
     def say(self, txt, sync=False):
@@ -140,7 +154,7 @@ class ESpeakNG(object):
     @property
     def voices(self):
 
-        res = self._espeak_exe(['--voices'])
+        res = self._espeak_exe(['--voices'], sync=True)
 
         logging.debug ('espeakng: voices: %s' % res)
 
