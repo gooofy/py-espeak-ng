@@ -39,12 +39,24 @@ G2P_TESTS = [
 
 class TestESpeakNG (unittest.TestCase):
 
+    def test_say_unkown_voice(self):
+
+        esng = ESpeakNG(voice='unknown-voice')
+        esng.pitch = 32
+        esng.speed = 150
+        res = esng.say('Hello World!', sync=True)
+
+        self.assertNotEqual (res, [])
+
+
     def test_say_en(self):
 
         esng = ESpeakNG(voice='english-us')
         esng.pitch = 32
         esng.speed = 150
-        esng.say('Hello World!', sync=True)
+        res = esng.say('Hello World!', sync=True)
+
+        self.assertEqual (res, [])
 
     def test_say_de(self):
 

@@ -100,7 +100,7 @@ class ESpeakNG(object):
 
         args.append(txte)
 
-        self._espeak_exe(args, sync=sync)
+        return self._espeak_exe(args, sync=sync)
 
     def synth_wav(self, txt, fmt='txt'):
 
