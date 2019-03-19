@@ -1,0 +1,3 @@
+include README.adoc
+include LICENSE
+include tests/*
