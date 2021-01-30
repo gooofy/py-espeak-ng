@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 #
 # Copyright 2017 Guenter Bartsch
@@ -20,38 +20,39 @@
 import logging
 import subprocess
 import tempfile
+import platform
 
 class ESpeakNG(object):
 
-    def __init__(self, 
-                 volume      =         100, 
+    def __init__(self,
+                 volume      =         100,
                  audio_dev   =        None,
                  word_gap    =          -1, # ms
                  capitals    =           0, # indicate capital letters with: 1=sound, 2=the word "capitals", higher values indicate a pitch increase (try -k20).
                  line_length =           0, # Line length. If not zero, consider lines less than this length as end-of-clause
                  pitch       =          50, # 0-99
-                 speed       =         175, # approx. words per minute 
-                 voice       = 'english-us'):
+                 speed       =         175, # approx. words per minute
+                 voice       = 'en'):
 
 
-        self._volume      = volume  
-        self._audio_dev   = audio_dev  
-        self._word_gap    = word_gap   
-        self._capitals    = capitals   
+        self._volume      = volume
+        self._audio_dev   = audio_dev
+        self._word_gap    = word_gap
+        self._capitals    = capitals
         self._line_length = line_length
-        self._pitch       = pitch      
-        self._speed       = speed      
-        self._voice       = voice      
+        self._pitch       = pitch
+        self._speed       = speed
+        self._voice       = voice
 
     def _espeak_exe(self, args, sync=False):
-        cmd = ['espeak-ng', 
+        cmd = ['espeak' if platform.system()=='Darwin' else 'espeak-ng',
                '-a', str(self._volume),
-               '-k', str(self._capitals), 
-               '-l', str(self._line_length), 
-               '-p', str(self._pitch), 
-               '-s', str(self._speed), 
-               '-v', self._voice, 
-               '-b', '1', # UTF8 text encoding 
+               '-k', str(self._capitals),
+               '-l', str(self._line_length),
+               '-p', str(self._pitch),
+               '-s', str(self._speed),
+               '-v', self._voice,
+               '-b', '1', # UTF8 text encoding
                ]
 
         if self._word_gap>=0:
@@ -102,11 +103,11 @@ class ESpeakNG(object):
 
         return self._espeak_exe(args, sync=sync)
 
-    def synth_wav(self, txt, fmt='txt'):
+    def synth_wav(self, txt, file=None, fmt='txt'):
 
         wav = None
 
-        with tempfile.NamedTemporaryFile() as f:
+        with (open(file, 'w') if file else tempfile.NamedTemporaryFile()) as f:
 
 
             if fmt == 'xs':
@@ -119,6 +120,9 @@ class ESpeakNG(object):
             args = ['-w', f.name, txte]
 
             self._espeak_exe(args, sync=True)
+
+            if file:
+                return
 
             f.seek(0)
             wav = f.read()
@@ -135,7 +139,7 @@ class ESpeakNG(object):
             args.append('--ipa=%s' % ipa)
         else:
             args.append('-x')
-        
+
         if tie:
             args.append('--tie=%s' % tie)
 
@@ -146,7 +150,7 @@ class ESpeakNG(object):
         for line in self._espeak_exe(args, sync=True):
 
             logging.debug(u'line: %s' % repr(line))
-            
+
             phonemes += line.decode('utf8').strip()
 
         return phonemes
@@ -199,7 +203,7 @@ class ESpeakNG(object):
 
     @property
     def audio_dev(self):
-        return self._audio_dev  
+        return self._audio_dev
     @audio_dev.setter
     def audio_dev(self, v):
         self._audio_dev   = v
