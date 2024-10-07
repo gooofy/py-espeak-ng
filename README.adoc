@@ -47,7 +47,7 @@ esng.say('Hallo Welt!')
 specify phonemes instead of words:
 [source,python]
 ----
-esng.voice = 'english-us'
+esng.voice = 'en-us'
 esng.say("[[h@l'oU w'3:ld]]")
 ----
 
@@ -61,7 +61,7 @@ From Text:
 import wave
 import StringIO
 
-esng.voice = 'english-us'
+esng.voice = 'en-us'
 wavs = esng.synth_wav('Hello World!')
 wav = wave.open(StringIO.StringIO(wavs))
 print wav.getnchannels(), wav.getframerate(), wav.getnframes()
