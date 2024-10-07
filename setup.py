@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(name             ='py-espeak-ng',
       version          ='0.1.8',
       description      ='Python interface for eSpeak NG',
-      long_description = open('README.md').read(),
+      long_description = open('README.adoc', encoding='utf-8').read(),
       url              ='https://github.com/gooofy/py-espeak-ng',
       classifiers      = [
                           'Topic :: Multimedia :: Sound/Audio :: Sound Synthesis',
