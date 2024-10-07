@@ -19,7 +19,7 @@
 
 import unittest
 import logging
-from io import StringIO, BytesIO
+from io import BytesIO
 import wave
 
 from espeakng import ESpeakNG
@@ -51,7 +51,7 @@ class TestESpeakNG (unittest.TestCase):
 
     def test_say_en(self):
 
-        esng = ESpeakNG(voice='english-us')
+        esng = ESpeakNG(voice='en-us')
         esng.pitch = 32
         esng.speed = 150
         res = esng.say('Hello World!', sync=True)
@@ -73,7 +73,7 @@ class TestESpeakNG (unittest.TestCase):
 
     def test_synth_wav(self):
 
-        esng = ESpeakNG(voice='english-us')
+        esng = ESpeakNG(voice='en-us')
         esng.pitch = 32
         esng.speed = 150
         wavs = esng.synth_wav('Hello World!')
@@ -85,7 +85,7 @@ class TestESpeakNG (unittest.TestCase):
 
     def test_synth_wav_xsampa(self):
 
-        esng = ESpeakNG(voice='english-us')
+        esng = ESpeakNG(voice='en-us')
         esng.pitch = 32
         esng.speed = 150
         wavs = esng.synth_wav("h@l'oU", fmt='xs')
@@ -96,7 +96,7 @@ class TestESpeakNG (unittest.TestCase):
         self.assertGreater (wav.getnframes(),   20000)
 
     def test_g2p(self):
-        esng = ESpeakNG(voice='english-us')
+        esng = ESpeakNG(voice='en-us')
 
         for g, xs_t, ipa_t in G2P_TESTS:
 

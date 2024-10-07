@@ -31,9 +31,8 @@ class ESpeakNG(object):
                  line_length         =           0, # Line length. If not zero, consider lines less than this length as end-of-clause
                  pitch               =          50, # 0-99
                  speed               =         175, # approx. words per minute 
-                 voice               = 'english-us',
+                 voice               =     'en-us',
                  additional_cli_args =          [],):
-
 
         self._volume              = volume  
         self._audio_dev           = audio_dev  
