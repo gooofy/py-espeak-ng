@@ -24,24 +24,26 @@ import tempfile
 class ESpeakNG(object):
 
     def __init__(self, 
-                 volume      =         100, 
-                 audio_dev   =        None,
-                 word_gap    =          -1, # ms
-                 capitals    =           0, # indicate capital letters with: 1=sound, 2=the word "capitals", higher values indicate a pitch increase (try -k20).
-                 line_length =           0, # Line length. If not zero, consider lines less than this length as end-of-clause
-                 pitch       =          50, # 0-99
-                 speed       =         175, # approx. words per minute 
-                 voice       = 'english-us'):
+                 volume              =         100, 
+                 audio_dev           =        None,
+                 word_gap            =          -1, # ms
+                 capitals            =           0, # indicate capital letters with: 1=sound, 2=the word "capitals", higher values indicate a pitch increase (try -k20).
+                 line_length         =           0, # Line length. If not zero, consider lines less than this length as end-of-clause
+                 pitch               =          50, # 0-99
+                 speed               =         175, # approx. words per minute 
+                 voice               = 'english-us',
+                 additional_cli_args =          [],):
 
 
-        self._volume      = volume  
-        self._audio_dev   = audio_dev  
-        self._word_gap    = word_gap   
-        self._capitals    = capitals   
-        self._line_length = line_length
-        self._pitch       = pitch      
-        self._speed       = speed      
-        self._voice       = voice      
+        self._volume              = volume  
+        self._audio_dev           = audio_dev  
+        self._word_gap            = word_gap   
+        self._capitals            = capitals   
+        self._line_length         = line_length
+        self._pitch               = pitch      
+        self._speed               = speed      
+        self._voice               = voice      
+        self._additional_cli_args = additional_cli_args
 
     def _espeak_exe(self, args, sync=False):
         cmd = ['espeak-ng', 
@@ -58,6 +60,8 @@ class ESpeakNG(object):
             cmd.extend(['-g', str(self._word_gap)])
 
         cmd.extend(args)
+
+        cmd.extend(self._additional_cli_args)
 
         logging.debug('espeakng: executing %s' % repr(cmd))
 
